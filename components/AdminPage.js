@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const emptyForm = {
   date: "",
@@ -166,7 +167,7 @@ export default function AdminPage() {
           <h1>חלונות זמינות</h1>
           <p className="subtitle">הגדרה ידנית של מועדי ביקור אפשריים</p>
         </div>
-        <a href="/">לעמוד ההזמנה</a>
+        <Link href="/">לעמוד ההזמנה</Link>
       </div>
 
       {!isUnlocked ? (
