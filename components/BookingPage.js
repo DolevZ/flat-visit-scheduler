@@ -85,15 +85,23 @@ export default function BookingPage() {
   }
 
   return (
-    <main className="page">
-      <section className="hero">
-        <div>
-          <p className="eyebrow">Flat Visit Scheduler</p>
+    <main className="page booking-page">
+      <section className="hero booking-hero">
+        <div className="hero-copy">
+          <p className="eyebrow">ביקור בדירה</p>
           <h1>קביעת ביקור בדירה</h1>
           <p className="subtitle">בחרו מועד פנוי והשאירו פרטים</p>
+          <div className="hero-meta" aria-label="פרטי התהליך">
+            <span>מועדים מתעדכנים בזמן אמת</span>
+            <span>אישור מיידי ביומן</span>
+          </div>
         </div>
 
-        <form className="panel" onSubmit={handleSubmit}>
+        <form className="panel booking-form" onSubmit={handleSubmit}>
+          <div className="panel-heading">
+            <h2>הפרטים שלכם</h2>
+            <p>נשתמש בפרטים רק לתיאום הביקור.</p>
+          </div>
           <div className="form-grid">
             <div className="field">
               <label htmlFor="name">שם פרטי</label>
@@ -142,22 +150,38 @@ export default function BookingPage() {
         </form>
       </section>
 
-      <section className="stack" aria-live="polite">
-        {loadingSlots ? <div className="notice">טוען מועדים פנויים...</div> : null}
+      <section className="stack slots-section" aria-live="polite">
+        <div className="section-heading">
+          <h2>בחרו מועד פנוי</h2>
+          <p>כל מועד נבדק מול ההזמנות הקיימות והיומן.</p>
+        </div>
+
+        {loadingSlots ? (
+          <div className="notice state-card loading-state">
+            <span className="spinner" aria-hidden="true" />
+            טוען מועדים פנויים...
+          </div>
+        ) : null}
         {error ? <div className="notice error">{error}</div> : null}
         {success ? (
-          <div className="notice success">
+          <div className="notice success success-state">
             הביקור נקבע בהצלחה. נתראה בדירה.
           </div>
         ) : null}
 
         {!loadingSlots && slots.length === 0 ? (
-          <div className="notice">אין כרגע מועדים פנויים.</div>
+          <div className="notice state-card empty-state">
+            <strong>אין כרגע מועדים פנויים</strong>
+            <span>אפשר לנסות שוב מאוחר יותר או לפנות אליי ישירות.</span>
+          </div>
         ) : null}
 
         {Object.entries(groupedSlots).map(([dateLabel, daySlots]) => (
-          <div className="panel" key={dateLabel}>
-            <h2>{dateLabel}</h2>
+          <div className="panel day-panel" key={dateLabel}>
+            <div className="day-heading">
+              <h3>{dateLabel}</h3>
+              <span>{daySlots.length} מועדים פנויים</span>
+            </div>
             <div className="slots-grid">
               {daySlots.map((slot) => (
                 <button
@@ -167,10 +191,12 @@ export default function BookingPage() {
                   aria-pressed={selectedSlot?.start === slot.start}
                   onClick={() => setSelectedSlot(slot)}
                 >
-                  <strong>
+                  <span className="slot-time">
                     {formatSlotTime(slot.start)} - {formatSlotTime(slot.end)}
-                  </strong>
-                  <span>מועד פנוי</span>
+                  </span>
+                  <span className="slot-label">
+                    {selectedSlot?.start === slot.start ? "נבחר" : "מועד פנוי"}
+                  </span>
                 </button>
               ))}
             </div>
