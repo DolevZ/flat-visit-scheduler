@@ -160,8 +160,8 @@ export default function AdminPage() {
   }
 
   return (
-    <main className="page">
-      <div className="topbar">
+    <main className={`page admin-page ${!isUnlocked ? "login-page" : ""}`}>
+      <div className="topbar admin-topbar">
         <div>
           <p className="eyebrow">ניהול</p>
           <h1>חלונות זמינות</h1>
@@ -171,7 +171,11 @@ export default function AdminPage() {
       </div>
 
       {!isUnlocked ? (
-        <form className="panel" onSubmit={handleLogin}>
+        <form className="panel login-card" onSubmit={handleLogin}>
+          <div className="panel-heading">
+            <h2>כניסה לניהול</h2>
+            <p>הזינו את סיסמת המנהל כדי לערוך זמינות.</p>
+          </div>
           <div className="field">
             <label htmlFor="admin-password">סיסמת מנהל</label>
             <input
@@ -191,8 +195,11 @@ export default function AdminPage() {
         </form>
       ) : (
         <section className="admin-grid">
-          <form className="panel" onSubmit={handleSubmit}>
-            <h2>{editingId ? "עריכת חלון זמינות" : "יצירת חלון זמינות"}</h2>
+          <form className="panel admin-form" onSubmit={handleSubmit}>
+            <div className="panel-heading">
+              <h2>{editingId ? "עריכת חלון זמינות" : "יצירת חלון זמינות"}</h2>
+              <p>בחרו תאריך, טווח שעות ומשך ביקור.</p>
+            </div>
             <div className="stack">
               <div className="field">
                 <label htmlFor="date">תאריך</label>
@@ -268,14 +275,23 @@ export default function AdminPage() {
             </div>
           </form>
 
-          <div className="panel">
-            <h2>חלונות קיימים</h2>
+          <div className="panel windows-panel">
+            <div className="panel-heading">
+              <h2>חלונות קיימים</h2>
+              <p>{windows.length} חלונות זמינות מוגדרים</p>
+            </div>
             <div className="window-list">
               {windows.length === 0 ? (
-                <div className="notice">עוד אין חלונות זמינות.</div>
+                <div className="notice state-card empty-state">
+                  <strong>עוד אין חלונות זמינות</strong>
+                  <span>צרו חלון ראשון כדי להציג מועדים בעמוד ההזמנה.</span>
+                </div>
               ) : null}
               {windows.map((window) => (
-                <article className="window-row" key={window.id}>
+                <article
+                  className={`window-row ${window.is_active ? "is-active" : "is-inactive"}`}
+                  key={window.id}
+                >
                   <div className="window-summary">
                     <div>
                       <h3>{window.date}</h3>
@@ -285,7 +301,9 @@ export default function AdminPage() {
                         {window.slot_duration_minutes} דקות
                       </p>
                     </div>
-                    <span className="badge">{window.is_active ? "פעיל" : "כבוי"}</span>
+                    <span className={`badge ${window.is_active ? "active" : "inactive"}`}>
+                      {window.is_active ? "פעיל" : "כבוי"}
+                    </span>
                   </div>
                   <div className="window-actions">
                     <button
