@@ -16,9 +16,10 @@
     "react-dom": "19.1.0"
   },
   "devDependencies": {
-    "eslint": "^9.28.0",
-    "eslint-config-next": "15.3.3"
-  },
+  "@eslint/eslintrc": "^3.3.1",
+  "eslint": "^9.28.0",
+  "eslint-config-next": "15.3.3"
+},
   "engines": {
     "node": ">=20.0.0"
   }
