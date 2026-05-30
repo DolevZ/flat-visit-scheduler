@@ -91,7 +91,9 @@ export default function BookingPage() {
           <p className="eyebrow">ביקור בדירה</p>
           <h1>קביעת ביקור בדירה</h1>
           <p className="subtitle">בחרו מועד פנוי והשאירו פרטים</p>
+          <p className="address-line">חנקין 114, חולון</p>
           <div className="hero-meta" aria-label="פרטי התהליך">
+            <span className="address-pill">כתובת הדירה: חנקין 114, חולון</span>
             <span>מועדים מתעדכנים בזמן אמת</span>
             <span>אישור מיידי ביומן</span>
           </div>
@@ -101,6 +103,10 @@ export default function BookingPage() {
           <div className="panel-heading">
             <h2>הפרטים שלכם</h2>
             <p>נשתמש בפרטים רק לתיאום הביקור.</p>
+          </div>
+          <div className="context-note">
+            <strong>כתובת הדירה</strong>
+            <span>חנקין 114, חולון</span>
           </div>
           <div className="form-grid">
             <div className="field">
