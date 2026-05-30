@@ -93,7 +93,6 @@ export default function BookingPage() {
           <p className="subtitle">בחרו מועד פנוי והשאירו פרטים</p>
           <p className="address-line">חנקין 114, חולון</p>
           <div className="hero-meta" aria-label="פרטי התהליך">
-            <span className="address-pill">כתובת הדירה: חנקין 114, חולון</span>
             <span>מועדים מתעדכנים בזמן אמת</span>
             <span>אישור מיידי ביומן</span>
           </div>
