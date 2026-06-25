@@ -155,6 +155,33 @@ export default function BookingPage() {
         </form>
       </section>
 
+      <section className="requirements-card" dir="rtl" aria-labelledby="requirements-title">
+        <div className="requirements-header">
+          <span className="requirements-marker" aria-hidden="true">
+            !
+          </span>
+          <div>
+            <h2 id="requirements-title">חשוב לדעת לפני קביעת ביקור</h2>
+            <p>
+              לפני קביעת ביקור, חשוב לדעת שהבעלים מבקש מספר בטחונות ומסמכים כחלק
+              מתהליך השכירות:
+            </p>
+          </div>
+        </div>
+
+        <ul className="requirements-list">
+          <li>ערב אחד עם תלושי שכר של שלושת החודשים האחרונים</li>
+          <li>תלושי שכר של שלושת החודשים האחרונים של הדייר/ים</li>
+          <li>שטר ערבות על סך 9,900 ₪, צ׳ק ללא תאריך</li>
+          <li>פיקדון מזומן על סך 5,000 ₪</li>
+          <li>ביצוע ביטוח דירה</li>
+        </ul>
+
+        <p className="requirements-closing">
+          אם זה מתאים לכם, אפשר לבחור מועד פנוי לביקור.
+        </p>
+      </section>
+
       <section className="stack slots-section" aria-live="polite">
         <div className="section-heading">
           <h2>בחרו מועד פנוי</h2>
