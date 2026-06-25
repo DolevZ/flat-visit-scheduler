@@ -12,6 +12,7 @@ export default function BookingPage() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [acceptedRequirements, setAcceptedRequirements] = useState(false);
 
   async function loadSlots() {
     setLoadingSlots(true);
@@ -55,6 +56,11 @@ export default function BookingPage() {
       return;
     }
 
+    if (!acceptedRequirements) {
+      setError("יש לאשר שקראתם והבנתם את דרישות הבטחונות לפני קביעת ביקור.");
+      return;
+    }
+
     setSubmitting(true);
 
     try {
@@ -76,6 +82,7 @@ export default function BookingPage() {
       setName("");
       setPhone("");
       setSelectedSlot(null);
+      setAcceptedRequirements(false);
       await loadSlots();
     } catch (submitError) {
       setError(submitError.message);
@@ -143,12 +150,16 @@ export default function BookingPage() {
             <button
               className="primary-button"
               type="submit"
-              disabled={submitting || loadingSlots || !selectedSlot}
+              disabled={
+                submitting || loadingSlots || !selectedSlot || !acceptedRequirements
+              }
             >
               {submitting
                 ? "קובע ביקור..."
                 : selectedSlot
-                  ? "קביעת ביקור"
+                  ? acceptedRequirements
+                    ? "קביעת ביקור"
+                    : "אשרו את דרישות הבטחונות כדי להמשיך"
                   : "בחרו מועד כדי להמשיך"}
             </button>
           </div>
@@ -169,17 +180,41 @@ export default function BookingPage() {
           </div>
         </div>
 
-        <ul className="requirements-list">
-          <li>ערב אחד עם תלושי שכר של שלושת החודשים האחרונים</li>
-          <li>תלושי שכר של שלושת החודשים האחרונים של הדייר/ים</li>
-          <li>שטר ערבות על סך 9,900 ₪, צ׳ק ללא תאריך</li>
-          <li>פיקדון מזומן על סך 5,000 ₪</li>
-          <li>ביצוע ביטוח דירה</li>
-        </ul>
+        <div className="requirements-list" role="list">
+          <div className="requirement-row" role="listitem">
+            <span className="requirement-dot" aria-hidden="true" />
+            <span>ערב אחד עם תלושי שכר של שלושת החודשים האחרונים</span>
+          </div>
+          <div className="requirement-row" role="listitem">
+            <span className="requirement-dot" aria-hidden="true" />
+            <span>תלושי שכר של שלושת החודשים האחרונים של הדייר/ים</span>
+          </div>
+          <div className="requirement-row" role="listitem">
+            <span className="requirement-dot" aria-hidden="true" />
+            <span>שטר ערבות על סך 9,900 ₪, צ׳ק ללא תאריך</span>
+          </div>
+          <div className="requirement-row" role="listitem">
+            <span className="requirement-dot" aria-hidden="true" />
+            <span>פיקדון מזומן על סך 5,000 ₪</span>
+          </div>
+          <div className="requirement-row" role="listitem">
+            <span className="requirement-dot" aria-hidden="true" />
+            <span>ביצוע ביטוח דירה</span>
+          </div>
+        </div>
 
         <p className="requirements-closing">
           אם זה מתאים לכם, אפשר לבחור מועד פנוי לביקור.
         </p>
+
+        <label className="requirements-confirmation">
+          <input
+            type="checkbox"
+            checked={acceptedRequirements}
+            onChange={(event) => setAcceptedRequirements(event.target.checked)}
+          />
+          <span>קראתי והבנתי את דרישות הבטחונות</span>
+        </label>
       </section>
 
       <section className="stack slots-section" aria-live="polite">
