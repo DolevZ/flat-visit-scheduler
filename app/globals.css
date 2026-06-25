@@ -225,6 +225,89 @@ h3 {
   font-weight: 800;
 }
 
+.requirements-card {
+  display: grid;
+  gap: 18px;
+  margin-top: 24px;
+  border: 1px solid rgba(15, 118, 110, 0.16);
+  border-radius: 22px;
+  padding: 22px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7fbf9 100%);
+  box-shadow: var(--shadow-soft);
+  direction: rtl;
+  text-align: right;
+}
+
+.requirements-header {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.requirements-marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+
+.requirements-header h2 {
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.requirements-header p,
+.requirements-closing {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.requirements-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  direction: rtl;
+  text-align: right;
+}
+
+.requirements-list li {
+  position: relative;
+  padding-inline-start: 0;
+  padding-inline-end: 22px;
+  color: #263632;
+  line-height: 1.65;
+}
+
+.requirements-list li::before {
+  position: absolute;
+  inset-inline-end: 0;
+  top: 0.72em;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--primary);
+  content: "";
+  transform: translateY(-50%);
+}
+
+.requirements-closing {
+  border-top: 1px solid rgba(15, 118, 110, 0.12);
+  padding-top: 14px;
+  color: var(--primary-dark);
+  font-weight: 800;
+}
+
 .booking-form,
 .admin-form,
 .windows-panel,
@@ -596,7 +679,8 @@ h3 {
   }
 
   .panel,
-  .day-panel {
+  .day-panel,
+  .requirements-card {
     padding: 18px;
   }
 
