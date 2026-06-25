@@ -276,29 +276,29 @@ h3 {
   gap: 10px;
   margin: 0;
   padding: 0;
-  list-style: none;
   direction: rtl;
   text-align: right;
 }
 
-.requirements-list li {
-  position: relative;
-  padding-inline-start: 0;
-  padding-inline-end: 22px;
+.requirement-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
   color: #263632;
+  direction: rtl;
   line-height: 1.65;
+  text-align: right;
 }
 
-.requirements-list li::before {
-  position: absolute;
-  inset-inline-end: 0;
-  top: 0.72em;
+.requirement-dot {
+  display: inline-block;
+  flex: 0 0 auto;
   width: 8px;
   height: 8px;
+  margin-top: 0.72em;
   border-radius: 999px;
   background: var(--primary);
-  content: "";
-  transform: translateY(-50%);
 }
 
 .requirements-closing {
@@ -306,6 +306,30 @@ h3 {
   padding-top: 14px;
   color: var(--primary-dark);
   font-weight: 800;
+}
+
+.requirements-confirmation {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  border: 1px solid rgba(15, 118, 110, 0.18);
+  border-radius: 16px;
+  padding: 14px;
+  background: rgba(223, 247, 239, 0.52);
+  color: var(--text);
+  cursor: pointer;
+  direction: rtl;
+  font-weight: 800;
+  text-align: right;
+}
+
+.requirements-confirmation input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--primary);
+  cursor: pointer;
 }
 
 .booking-form,
